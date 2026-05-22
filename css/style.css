@@ -1,0 +1,332 @@
+.big { font-size: 1.18rem; }
+
+/* Evidenziazione verde per 'Anywhere on Earth' */
+.highlight-green {
+  background: var(--teal-100);
+  color: var(--teal-700);
+  border-radius: 8px;
+  padding: 2px 8px;
+  font-weight: 600;
+  font-size: 1.02em;
+  box-shadow: 0 1px 4px rgba(20,184,166,0.08);
+  display: inline-block;
+}
+/* =========
+   ReSAISE 2026 - Light Teal theme
+   ========= */
+
+/* Optional: force light mode even if the OS prefers dark */
+html { color-scheme: light; }
+
+:root{
+  /* Soft teal palette */
+  --teal-50:#f0fdfa; --teal-100:#ccfbf1; --teal-200:#99f6e4; --teal-300:#5eead4;
+  --teal-400:#2dd4bf; --teal-500:#14b8a6; --teal-600:#0d9488; --teal-700:#0f766e;
+
+  /* Light neutrals */
+  --bg:#ffffff;
+  --ink:#1f2937;       /* softer than near-black */
+  --muted:#6b7280;     /* body-muted */
+  --rule:#e9eef3;      /* separators */
+
+  /* Accents */
+  --link: var(--teal-600);
+  --ring: var(--teal-400);
+  --maxw: 960px;
+
+  /* Hero gradient (fallback) */
+  --hero-grad-start: #f7fffe;  /* extremely light aqua */
+  --hero-grad-end: #ffffff;
+
+  /* Hero overlay for readability over the photo */
+  --hero-overlay-top: rgba(0, 0, 0, 0.6);  
+  --hero-overlay-bottom: rgba(0, 0, 0, 0.6);
+
+  /* --- Typography tokens (so sections can override easily) --- */
+  --font-sans: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: Georgia, "Times New Roman", Times, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+
+  /* Default color tokens */
+  --color-primary: var(--teal-600);
+  --color-accent: var(--teal-500);
+  --color-muted: var(--muted);
+
+  /* Hero-specific tokens (override on the .hero container for variations) */
+  --hero-title-color: #ffffff;
+  --hero-subtitle-color: rgba(255,255,255,0.95);
+  --hero-title-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+
+*{box-sizing:border-box}
+html,body{
+  margin:0; padding:0; background:var(--bg); color:var(--ink);
+  font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Inter,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+
+/* Layout */
+.container{max-width:var(--maxw); margin:0 auto; padding:28px 16px}
+.container.narrow{max-width:780px}
+
+/* Center utility for hero and other sections */
+.center {
+  text-align: center;
+}
+
+/* Header / Nav (lighter look) */
+header{
+  position:sticky; top:0; z-index:20;
+  background:#ffffffea; /* translucent white */
+  backdrop-filter:saturate(160%) blur(6px);
+  border-bottom:1px solid var(--rule);
+}
+.nav{display:flex; gap:12px; flex-wrap:wrap; align-items:center; padding:14px 16px; max-width:var(--maxw); margin:0 auto}
+.nav a{
+  padding:8px 12px; border-radius:10px; text-decoration:none; color:var(--ink);
+  transition:background .18s ease, color .18s ease, box-shadow .18s ease;
+}
+.nav a:hover{
+  background:var(--teal-50);
+  box-shadow:0 1px 0 rgba(13,148,136,.08) inset;
+}
+.nav a[aria-current="page"]{
+  background:var(--teal-100); color:#0b3b38;
+}
+
+/* Footer */
+footer{border-top:1px solid var(--rule); padding:28px 16px; color:var(--muted)}
+
+/* Typography */
+h1{font-size:clamp(1.9rem, 2.5vw, 2.3rem); line-height:1.2; margin:1rem 0 .5rem}
+h2{font-size:1.28rem; color:#334155; font-weight:700; margin:1.25rem 0 .4rem}
+h3{font-size:1.12rem; margin:1rem 0 .25rem}
+p{margin:.6rem 0; font-size:1.08rem}
+a{color:var(--link)} a:hover{color:#0f766e}
+::selection{background:var(--teal-200)}
+
+/* =========================
+    HERO with background image
+    ========================= */
+.hero{
+  /* Change this path if you use another filename/format */
+  --hero-img: url("/2026/img/hero.jpeg");
+
+  /* Overlay gradient is currently disabled to avoid stretching the photo.
+      To re-enable it later, uncomment the linear-gradient(...) line below
+      and adjust the colors via --hero-overlay-top / --hero-overlay-bottom. */
+  background-image:
+     linear-gradient(180deg, var(--hero-overlay-top), var(--hero-overlay-bottom)),
+     var(--hero-img),
+     linear-gradient(180deg, var(--hero-grad-start), var(--hero-grad-end)); /* fallback */
+
+  /* Ensure each background layer has an explicit size. When the overlay
+    gradient is enabled there are three layers (overlay, image, fallback),
+    so provide three sizes so the image keeps 'cover' and doesn't stretch. */
+  background-size: cover, cover, 100% 100%;
+  background-position: center, center bottom, center;
+  background-repeat: no-repeat;
+  border-bottom: 1px solid var(--rule);
+  min-height: clamp(650px, 62vh, 700px);
+}
+
+.hero-inner{
+  max-width:var(--maxw);
+  min-height:inherit;
+  margin:0 auto;
+  padding:44px 16px 28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.hero .small{opacity:.85}
+kbd{
+  background:var(--teal-100); color:#0f4b47;
+  padding:2px 6px; border-radius:6px; font-size:.9rem;
+}
+
+/* Hero typography: white titles, custom font/size, and improved contrast */
+.hero h1{
+  color: #ffffff; /* white title */
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  /* Responsive size: grows with viewport but clamps to a sensible range */
+  font-size: clamp(1.8rem, 4.2vw, 3rem);
+  line-height: 1.05;
+  margin: 0 0 .35rem;
+  /* subtle shadow to keep text readable over photos */
+  text-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+
+.hero h2{
+  color: rgba(255,255,255,0.95);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 600;
+  font-size: clamp(1.05rem, 2.2vw, 1.4rem);
+  margin: 0 0 .65rem;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.28);
+}
+
+.hero a {
+  color: #ffffff;
+  text-decoration-color: rgba(255,255,255,0.75);
+}
+
+.hero a:hover {
+  color: var(--teal-100);
+}
+
+/* Make the small helper text in the hero light/white too */
+.hero .small{color: rgba(255,255,255,0.9)}
+
+/* Buttons (lighter but still accessible) */
+.btn{
+  display:inline-block; padding:10px 14px; border-radius:12px; font-weight:600; text-decoration:none;
+  border:1px solid transparent;
+  transition:transform .06s ease, background .18s ease, border-color .18s ease, color .18s ease, box-shadow .18s ease;
+}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible{outline:2px solid var(--ring); outline-offset:2px}
+
+.btn-primary{background:var(--teal-500); color:#fff; box-shadow:0 6px 16px rgba(20,184,166,.18)}
+.btn-primary:hover{background:var(--teal-600)}
+.btn-ghost{background:#fff; color:var(--teal-700); border-color:var(--teal-300)}
+.btn-ghost:hover{background:var(--teal-50); border-color:var(--teal-400)}
+
+/* Callouts & cards */
+.callout{
+  padding:14px 16px;
+  background:linear-gradient(180deg,#ffffff, var(--teal-50));
+  border:1px solid var(--teal-100); border-radius:14px;
+}
+.cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px}
+.card{
+  border:1px solid var(--rule); border-radius:14px; padding:14px; background:#fff;
+  transition:box-shadow .18s ease, border-color .18s ease;
+}
+.card:hover{box-shadow:0 10px 24px rgba(17,94,89,.08); border-color:#dfe6ec}
+.card h3{margin:.25rem 0 .25rem; font-size:1.05rem}
+.card .affil{color:var(--muted); font-size:.95rem}
+
+/* Program timeline (kept light) */
+.timeline{position:relative; margin:18px 0; padding-left:26px}
+.timeline:before{
+  content:""; position:absolute; left:10px; top:0; bottom:0; width:2px; background:var(--teal-100);
+}
+.tl-item{position:relative; margin:14px 0; padding-left:6px}
+.tl-item:before{
+  content:""; position:absolute; left:-2px; top:.35rem; width:10px; height:10px; border-radius:50%;
+  background:var(--teal-500); box-shadow:0 0 0 3px var(--teal-100);
+}
+.time{font-weight:700; color:#0f766e}
+
+/* Lists & misc */
+ul,ol{padding-left:1.15rem}
+hr{border:none; border-top:1px solid var(--rule); margin:24px 0}
+.small{color:var(--muted); font-size:1rem}
+
+.shift-right {
+  margin-left: 48px;
+  margin-bottom: 0.7em;
+}
+
+.shift-right ul {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+.shift-right ul li {
+  margin-bottom: 0.05em;
+}
+
+.big { font-size: 1.18rem; }
+
+/* Images */
+img.responsive{max-width:100%; height:auto; border-radius:14px}
+
+/* Focus */
+:focus-visible{outline:2px solid var(--ring); outline-offset:2px}
+
+/* Responsive tweak */
+@media (min-width: 980px){
+  .container{padding:36px 16px}
+  .hero-inner{padding:56px 16px 34px}
+}
+
+/* Organizers horizontal bar */
+.organizers-bar {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 32px 0 24px 0;
+  flex-wrap: wrap;
+}
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  min-width: 160px;
+  padding: 14px 10px;
+}
+.profile-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--teal-100);
+  box-shadow: 0 2px 12px rgba(20,184,166,0.08);
+  margin-bottom: 14px;
+}
+.profile-name {
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: none;
+  margin-bottom: 4px;
+  transition: color .18s;
+}
+.profile-name:hover {
+  color: var(--teal-700);
+  text-decoration: underline;
+}
+.profile-affil {
+  color: var(--muted);
+  font-size: .98rem;
+  text-align: center;
+  margin-bottom: 2px;
+}
+
+/* -----------------------------
+   Utility classes and examples
+   - Use CSS variables on a parent (section/container) to change fonts/colors
+   - Or apply the utility classes directly to elements
+   ----------------------------- */
+
+/* Font utilities */
+.font-sans{font-family:var(--font-sans) !important}
+.font-serif{font-family:var(--font-serif) !important}
+.font-mono{font-family:var(--font-mono) !important}
+
+/* Text color utilities */
+.text-primary{color:var(--color-primary) !important}
+.text-accent{color:var(--color-accent) !important}
+.text-muted{color:var(--color-muted) !important}
+.text-hero-title{color:var(--hero-title-color) !important}
+.text-hero-subtitle{color:var(--hero-subtitle-color) !important}
+
+/* Background utilities */
+.bg-primary{background:var(--color-primary) !important}
+.bg-accent{background:var(--color-accent) !important}
+
+/* Example: make a section use a different font + color by setting variables on the container
+   <section class="container" style="--font-sans: 'Georgia', serif; --color-primary:#8b5cf6"> ... </section>
+*/
+
+/* Example helper: a theme block that changes font and primary color */
+.theme-alt{
+  --font-sans: Georgia, 'Times New Roman', Times, serif;
+  --color-primary: #8b5cf6; /* violet example */
+}
+
+/* NOTE: intentionally NO dark-mode override here to keep the site light */
