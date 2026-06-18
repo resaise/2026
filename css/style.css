@@ -261,6 +261,24 @@ img.responsive{max-width:100%; height:auto; border-radius:14px}
   margin: 32px 0 24px 0;
   flex-wrap: wrap;
 }
+.steering-committee {
+  display: grid !important;
+  grid-template-columns: repeat(3, 200px);
+  gap: 32px;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: initial;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 760px) {
+  .steering-committee {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 200px));
+    width: 100%;
+  }
+}
 .profile {
   display: flex;
   flex-direction: column;
